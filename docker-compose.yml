@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  mysqldb:
+    image: 'mysql:5.7'
+    restart:always
+    volumes:
+      - 'mydb:/var/lib/mysql'
+    environment:
+      - MYSQL_DATABASE=test_db
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+  web:
+    build:
+      context: .
+    ports:
+      - '8088:8080'
+    volumes:
+      - './target/LoginWebApp-1.war:/usr/local/tomcat/webapps/LoginWebApp-1.war'
+    depends_on:
+      - mysqldb
+volumes:
+  mydb:
+    driver: local
+  java_data:
+    driver: local

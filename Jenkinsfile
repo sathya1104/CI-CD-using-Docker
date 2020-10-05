@@ -47,7 +47,7 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 sathya1104/samplewebapp"
+                sh "docker run -d -p 8003:8080 sathya1104/samplewebapp:$BUILD_NUMBER"
  
             }
         }

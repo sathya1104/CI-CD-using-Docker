@@ -1,3 +1,4 @@
+def DOCKER_REGISTRY_URI="https://registry.hub.docker.com"
 pipeline {
     agent any
 	
@@ -35,7 +36,7 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-			def DOCKER_REGISTRY_URI="https://registry.hub.docker.com"
+			
             withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 				sh "docker login --password=${PASSWORD} --username=${USERNAME} ${DOCKER_REGISTRY_URI}"
 			}

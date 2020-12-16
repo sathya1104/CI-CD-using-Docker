@@ -28,7 +28,7 @@ pipeline {
                 sh 'docker build -t samplewebapp:latest .' 
                 //sh 'docker tag samplewebapp sathya1104/samplewebapp:latest'
                 sh 'docker tag samplewebapp sathya1104/samplewebapp:$BUILD_NUMBER'
-               
+                sh 'docker images'
           }
         }
      

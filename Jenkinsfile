@@ -35,13 +35,13 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "https://registry.hub.docker.com" ]) {
-          //sh  'docker push sathya1104/samplewebapp:latest'
-            sh  'docker push sathya1104/samplewebapp:$BUILD_NUMBER' 
-        }
+			def DOCKER_REGISTRY_URI="https://registry.hub.docker.com"
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+				sh "docker login --password=${PASSWORD} --username=${USERNAME} ${DOCKER_REGISTRY_URI}"
+			}
                   
           }
-        }
+  }
      
       stage('Run Docker container on Jenkins Agent') {
              
